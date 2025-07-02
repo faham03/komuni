@@ -132,9 +132,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTIFICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentification.JWTAuthentification',
+#     ),
+# }
+#
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+#     'AUTH_HEADER_TYPES': ('Bearer',),
+# }
+#
+# AUTH_USER_MODEL = 'core.User'
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTIFICATION_CLASSES': (
-        'rest_framework_simplejwt.authentification.JWTAuthentification',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
