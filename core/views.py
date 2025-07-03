@@ -78,6 +78,21 @@ class ResourceListCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+class ResourceDetailView(generics.RetrieveAPIView):
+    queryset = Resource.objects.all()
+    serializer_class = ResourceSerializer
+    permission_classes = [permissions.AllowAny]
+
+class ResourceUpdateView(generics.UpdateAPIView):
+    queryset = Resource.objects.all()
+    serializer_class = ResourceSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_update(self, serializer):
+        if self.request.user != self.get_object().author:
+            raise PermissionDenied("Vous ne pouvez modifier que vos propres ressources.")
+        serializer.save()
+
 class ResourceDeleteView(generics.DestroyAPIView):
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
